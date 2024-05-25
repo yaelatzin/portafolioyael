@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación de Asistencia - Boda</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            margin: auto;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 40px);
+            padding: 10px;
+            margin: 15px 0;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #25D366;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #128C7E;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>¡Nos Casamos!</h1>
+        <p>Nos encantaría contar con tu presencia en nuestro día especial.</p>
+        <p><strong>Fecha:</strong> 15 de junio de 2024</p>
+        <p><strong>Lugar:</strong> Jardines del Paraíso</p>
+        <input type="text" id="userPhone" placeholder="Tu número de teléfono">
+        <button id="confirmButton">Confirmar Asistencia</button>
+    </div>
+
+    <script>
+        document.getElementById('confirmButton').onclick = function() {
+            var userPhone = document.getElementById('userPhone').value.trim();
+            if (userPhone === '') {
+                alert('Por favor, ingresa tu número de teléfono.');
+                return;
+            }
+
+            // Validar el número de teléfono ingresado
+            var phonePattern = /^[0-9]{10,15}$/;
+            if (!phonePattern.test(userPhone)) {
+                alert('Por favor, ingresa un número de teléfono válido.');
+                return;
+            }
+
+            var phoneNumber = '1234567890'; // Reemplaza con el número de teléfono del destinatario
+            var message = encodeURIComponent(`¡Hola! Quiero confirmar mi asistencia a la boda el 15 de junio de 2024 en Jardines del Paraíso. Mi número de contacto es: ${userPhone}`);
+            var url = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${message}`;
+            window.location.href = url;
+        };
+    </script>
+</body>
+</html>
